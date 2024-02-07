@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+// 全局广播消息
+message Broadcast {
+    // 发送消息的用户Uid
+    int64 Sender = 1;
+    string Username = 2;
+    // 消息类型
+    // 1: 用户上线, 2: 用户下线, 3: 全局聊天
+    int32 MsgType = 3;
+    oneof Data {
+        // 聊天内容，当MsgType = 3时
+        string Content = 4;
+    }
+}
+
+// 同步用户ID给客户端
+message SyncUser {
+    // 用户ID
+    int64 Uid = 1;
+    // 用户名
+    string Username = 2;
+}
+
+// 聊天
+message Chat {
+    // 聊天内容，当MsgType = 3时
+    string Content = 1;
+}
